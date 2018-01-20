@@ -4,6 +4,9 @@
 ***
 
 # Notas importantes del lenguaje de Go
+
+## 1
+
 Para romper un slice en un valor y continuar en otro, se usa de la misma manera que cuando adicionamos elementos:
 ```
 E := []int{}
@@ -12,7 +15,7 @@ E = append(E[:4], E[8:]...)
 
 En Go los ***...*** representan como un bucle for pero continuado de una forma implícita.
 
-***
+## 2
 
 Los ***<<*** y ***>>*** son operadores usados para crear númeross.
 
