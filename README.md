@@ -1,5 +1,14 @@
 # Soluciones de codility usando en lenguaje Go
 - [x] DemoTicket (Test Score= 100%)
+- [ ] Iterations
+  - [ ] BinaryGap
+- [ ] Arrays
+  - [ ] OddOccurrencesInArray
+  - [ ] CyclicRotation  
+- [ ] Time Complexility
+   - [ ] FrogJmp
+   - [ ] PermMissingElem
+   - [ ] TapeEquilibrium
 
 ***
 
