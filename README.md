@@ -30,3 +30,14 @@ Los ***<<*** y ***>>*** son operadores usados para crear númeross.
 
 El operador ***n << m*** es equivalente a "n multiplicado por 2, m veces" = n * 2^m.
 El operador ***n >> m*** es equivalente a "n dividido por 2, m veces" = n * 2^(-m).
+
+## 3
+
+En Golang para convertir un número decimal a binario:
+	strconv.FormatInt(int64(numero), 2)
+
+Para saber el tipo de variable usar reflect.TypeOf(variable)
+
+Para convertir string a int usar strconv.Atoi("string")
+
+Para convertir int a string usar Z,_ :=strconv.Itoa(int)
