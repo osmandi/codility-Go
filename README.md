@@ -41,3 +41,8 @@ Para saber el tipo de variable usar reflect.TypeOf(variable)
 Para convertir string a int usar strconv.Atoi("string")
 
 Para convertir int a string usar Z,_ :=strconv.Itoa(int)
+
+## 4
+
+%q En Printf para incluir arrays
+
