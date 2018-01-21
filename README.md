@@ -1,7 +1,7 @@
 # Soluciones de codility usando en lenguaje Go
 - [x] DemoTicket (Test Score= 100%)
-- [ ] Iterations
-  - [ ] BinaryGap
+- [x] Iterations
+  - [x] BinaryGap
 - [ ] Arrays
   - [ ] OddOccurrencesInArray
   - [ ] CyclicRotation  
