@@ -1,3 +1,5 @@
+// Score= 100%
+
 // Notas
 /*
 - Retornar la longitud máxima de un número binario (cantidad de 0 entre 1) Ejemplo:
