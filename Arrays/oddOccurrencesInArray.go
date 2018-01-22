@@ -51,7 +51,7 @@ func convertToString(A []int) []string {
 func countString(A, B []string) int {
 
 	// Une el array A
-	arrayAJoin := strings.Join(A, "")
+	arrayAJoin := strings.Join(A, "  ")
 
 	// Donde se guardará el valor impar
 	var numberImpar int
