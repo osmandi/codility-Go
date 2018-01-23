@@ -11,7 +11,10 @@ Errors:
 - n=999,999 -> Runtime 6 sec, time limit 0.48 sec
 */
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 /*
 Autor: @osmandi
@@ -47,23 +50,26 @@ func encontrarImpar(A, B []int) int {
 
 	// Cantidad encontrados
 	encontrado := make(map[int]int)
+	encontrado[0] = 0
 
+	// Canal
+	canalEncontrado := make(chan map[int]int)
+
+	// Correr A[i] con el array B en cada goroutina
+	// para guardar los números repetidos en el mapa
 	for i := range A {
 		for j := range B {
-			if B[j] == A[i] {
-				encontrado[B[j]] += 1
-			}
+
 		}
 	}
 
 	for i := range encontrado {
 		if encontrado[i] == 1 {
-
 			return i
 		}
 	}
 
-	fmt.Println(encontrado)
+	//	fmt.Println(encontrado)
 
 	return 0
 }
@@ -71,10 +77,11 @@ func encontrarImpar(A, B []int) int {
 // Función del ejercicio inmodificable
 func Solution(A []int) int {
 
+	// Ordenar array
+	sort.Ints(A)
+
 	arrayLimpio := eliminarRepetidos(A)
 	encontrado := encontrarImpar(A, arrayLimpio)
-
-	//	fmt.Printf("El valor impar es %d:", encontrado)
 
 	return encontrado
 }
