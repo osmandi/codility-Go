@@ -1,88 +1,65 @@
-// Notas
-/*
-Score 44%
-
-n=201, 2001 => Error
-n=100003,999999 (6sec -> 0.1sec), (6sec -> 0.3sec or 0.5 sec)
-
-*/
-
 package main
 
+// Autor: @osmandi
+// 55% : https://app.codility.com/demo/results/trainingXNMBTH-UA9/
+/*
+Número de índices de array: 1 - 1,000,000
+Rango de cada elemento: 1 - 1,000,000,000
+*/
 import (
 	"fmt"
-	"strconv"
-	"strings"
+	"runtime"
+	"sync"
 )
 
-// Eliminar números repetidos
-func eliminatePaired(A []int) []int {
-
-	// Mapa que ayudará a elimina repetidos
-	pareado := make(map[int]bool)
-
-	// Array que almacenará los valores
-	var numero []int
-
-	// Eliminar valores repetidos
-	for i := range A {
-		if pareado[A[i]] == false {
-			pareado[A[i]] = true
-			numero = append(numero, A[i])
-		}
-	}
-
-	return numero
-}
-
-// Convertir Array int a string
-func convertToString(A []int) []string {
-
-	var B []string
-
-	for i := range A {
-		B = append(B, strconv.Itoa(A[i]))
-	}
-
-	return B
-}
-
-// Retornar el valor que solo aparece una sola vez
-func countString(A, B []string) int {
-
-	// Une el array A
-	arrayAJoin := strings.Join(A, "  ")
-
-	// Donde se guardará el valor impar
-	var numberImpar int
-
-	// Detectar cuál valor está solo una vez
-	for i := range B {
-		if strings.Count(arrayAJoin, B[i]) == 1 {
-			numberImpar, _ := strconv.Atoi(B[i])
-			return numberImpar
-		}
-	}
-
-	return numberImpar
-}
-
 func Solution(A []int) int {
+	var conteoMap = make(map[int]int)
+	var result = make(chan int, len(A))
+	var mutex = &sync.Mutex{}
+	var numberImpar int
+	// Ordenar el array
+	//	sort.Ints(A)
 
-	// Eliminar elementos repetidos
-	arrayNoPaired := eliminatePaired(A)
+	for w := range A {
+		go func(A []int, w int, result chan<- int) {
+			llave := A[w]
+			val := 1
+			mutex.Lock()
+			// Presencia en el map
+			v, ok := conteoMap[llave]
+			if ok {
+				conteoMap[llave] = v + 1
+			} else {
+				conteoMap[llave] = val
+			}
+			mutex.Unlock()
+			result <- w
+			runtime.Gosched()
 
-	// Convertir arrays int a string
-	arrayString := convertToString(A)
-	arrayNoPairedString := convertToString(arrayNoPaired)
+		}(A, w, result)
+	}
 
-	// Extraer número impar
-	number := countString(arrayString, arrayNoPairedString)
+	//	time.Sleep(3000 * time.Millisecond)
+	// Para tener un control sobre el tiempo
+	for a := 0; a <= len(A)-1; a++ {
+		<-result
+	}
 
-	return number
+	mutex.Lock()
+	// Recorrer el mapa
+	for i := range conteoMap {
+		if conteoMap[i] == 1 {
+			return i
+		}
+	}
+	mutex.Unlock()
+
+	// Identificar el impar
+	return numberImpar
+
 }
 
 func main() {
-	A := []int{9, 3, 9, 3, 9, 7, 9}
-	fmt.Println(Solution(A))
+	array := []int{3, 2, 3, 2, 4, 7, 4}
+	fmt.Println("Número impar:", Solution(array))
 }
