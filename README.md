@@ -3,8 +3,8 @@
 - [x] Iterations
   - [x] BinaryGap
 - [ ] Arrays
-  - [ ] OddOccurrencesInArray
   - [ ] CyclicRotation  
+  - [ ] OddOccurrencesInArray
 - [ ] Time Complexility
    - [ ] FrogJmp
    - [ ] PermMissingElem
